@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form')
     const ul = document.getElementById('tasks')
     const input = document.getElementById('task')
+    const button = document.querySelector('button');
 
     let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
 
     localStorage.setItem('items', JSON.stringify(itemsArray))
     const data = JSON.parse(localStorage.getItem('items'))
-
 
     const liMaker = list => {
         const li = document.createElement('li')
@@ -25,9 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         input.value = '';
     }
-
     data.forEach(item => {
         liMaker(item)
-    })
-    
+    })   
+
+    button.addEventListener('click', function() {
+        localStorage.clear()
+        while (ul.firstChild) {
+          ul.removeChild(ul.firstChild)
+        }
+      })
 })
